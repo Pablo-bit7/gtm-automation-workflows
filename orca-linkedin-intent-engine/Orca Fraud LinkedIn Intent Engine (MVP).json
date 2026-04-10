@@ -1,0 +1,1010 @@
+{
+  "name": "Orca Fraud LinkedIn Intent Engine (MVP)",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1sXJmXXEbpfDYYH8KPjj3VQ8X920ERP6D1HHtZTfwU9c",
+          "mode": "list",
+          "cachedResultName": "orca_raw_engagements",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1sXJmXXEbpfDYYH8KPjj3VQ8X920ERP6D1HHtZTfwU9c/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1sXJmXXEbpfDYYH8KPjj3VQ8X920ERP6D1HHtZTfwU9c/edit#gid=0"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "c165f14f-2375-4859-b05f-b3ebb61d527c",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "YYc70FnzNzE2x9Qq",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a50346ea-d497-4593-bb83-c9cc8969e308",
+              "name": "name",
+              "value": "={{ $json.fullName }}",
+              "type": "string"
+            },
+            {
+              "id": "2e66cf94-a1f1-4b03-b8e2-2bcdadb06675",
+              "name": "title",
+              "value": "={{ $json.linkedinJobTitle }}",
+              "type": "string"
+            },
+            {
+              "id": "ce8de3ec-ecf7-4316-a418-93465a279f9f",
+              "name": "company",
+              "value": "={{ $json.companyName }}",
+              "type": "string"
+            },
+            {
+              "id": "0cb9e598-20ba-489b-8a5d-61878c8e8b80",
+              "name": "industry",
+              "value": "={{ $json.companyIndustry }}",
+              "type": "string"
+            },
+            {
+              "id": "5084f161-7e62-44a8-b729-b665736591a5",
+              "name": "headline",
+              "value": "={{ $json.linkedinHeadline }}",
+              "type": "string"
+            },
+            {
+              "id": "0f361471-3338-4955-9281-99a13833b409",
+              "name": "engagement",
+              "value": "={{ $json.engagementType }}",
+              "type": "string"
+            },
+            {
+              "id": "69204ec7-9764-4fe5-a4c4-38478e2ec3da",
+              "name": "profile_url",
+              "value": "={{ $json.linkedinProfileUrl }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "ce64a6c0-d1d3-491c-b1ca-5569b7a3d49a",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "f606e046-671f-4693-8fd1-a6f46670f58a",
+              "leftValue": "={{ $json.title }}",
+              "rightValue": "=/(recruiter|talent|consultant|student|advisor|coach|agency)/i",
+              "operator": {
+                "type": "string",
+                "operation": "notRegex"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        416,
+        0
+      ],
+      "id": "2752fec8-d374-4cca-a514-c2d886ad79c1",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Company Name: {{ $json.company }}\nIndustry: {{ $json.industry }}\nJob Title: {{ $json.title }}\nHeadline: {{ $json.headline }}\n\nReturn ONLY JSON in this format:\n{\n  \"category\": \"\",\n  \"relevant_to_orca\": \"\",\n  \"reason\": \"\"\n}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You analyse companies to determine whether they are fintech or payment infrastructure businesses that may need fraud detection software.\n\nCompany Name: {company}\nIndustry: {industry}\nJob Title: {title}\nHeadline: {headline}\n\nYou MUST classify the company into EXACTLY one of these categories:\nNeobank\nDigital Wallet\nPayment Processor\nRemittance Platform\nCross-Border Payments\nFintech Infrastructure\nNot Relevant\n\nReturn ONLY JSON in this format:\n{\n  \"category\": \"\",\n  \"relevant_to_orca\": \"\",\n  \"reason\": \"\"\n}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        624,
+        0
+      ],
+      "id": "fd46fcd2-63f4-420b-8a68-6b7841817181",
+      "name": "AI Agent",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-pro",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        560,
+        192
+      ],
+      "id": "8abd922f-a71e-40d0-b4ab-a76d77054edf",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "fGKNxaMVbvMVc6W4",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"category\": \"\",\n  \"relevant_to_orca\": \"\",\n  \"reason\": \"\"\n}",
+        "autoFix": true,
+        "customizeRetryPrompt": true,
+        "prompt": "Instructions:\n--------------\nYou analyse companies to determine whether they are fintech or payment infrastructure businesses that may need fraud detection software. \n\nYou MUST classify the company into EXACTLY one of these categories:\n* Neobank\n* Digital Wallet\n* Payment Processor\n* Remittance Platform\n* Cross-Border Payments\n* Fintech Infrastructure\n* Not Relevant\n\nReturn ONLY JSON in this format: \n{\n  \"category\": \"\",\n  \"relevant_to_orca\": \"\",\n  \"reason\": \"\"\n} \n--------------\nCompletion:\n--------------\n{completion}\n--------------\n\nAbove, the Completion did not satisfy the constraints given in the Instructions.\nError:\n--------------\n{error}\n--------------\n\nPlease try again. Please only respond with an answer that satisfies the constraints laid out in the Instructions:"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        688,
+        192
+      ],
+      "id": "0c8bf1d7-2aa6-4a2e-8cb3-bbec12431c4a",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "content": "## Lead Filtering & Company Classification",
+        "height": 448,
+        "width": 1216
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -80,
+        -96
+      ],
+      "typeVersion": 1,
+      "id": "d237166b-bc19-4243-8b56-10aabc1a7c89",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "3a0e93bd-5e5b-4316-89e0-444597c1e119",
+              "leftValue": "={{ $json.output.relevant_to_orca }}",
+              "rightValue": "=/(yes)/i",
+              "operator": {
+                "type": "string",
+                "operation": "regex"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        960,
+        0
+      ],
+      "id": "1ee3690c-d502-4b23-94bb-3768fab08128",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Company Category: {{ $json.output.category }}\nJob Title: {{ $('Edit Fields').item.json.title }}\nCompany Name: {{ $('Edit Fields').item.json.company }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a Senior Risk Analyst at Orca Fraud. Your task is to analyze a lead and provide specific classifications for sales outreach.\n\n1. Fraud Exposure: Based on the company category, how high is the risk of fraud?\n- High: Payment Processor, Digital Wallet, Neobank, Remittance Platform, Cross-Border Payments.\n- Medium: Fintech Infrastructure.\n- Low: Not Relevant.\n\n2. Fraud Insight: A concise (max 25 words) sentence explaining why this specific person at this specific company should care about Orca Fraud.\n\n3. Persona Type: Categorize the person STRICTLY based on their Job Title and Company Category:\n- Fraud: Titles containing \"Fraud\", \"AML\", \"Financial Crime\", \"Loss Prevention\", \"Chargeback\".\n- Risk: Titles containing \"Risk\", \"Compliance\", \"Internal Audit\", \"Governance\", \"Regulatory\", \"Legal\".\n- Tech: Titles containing \"Engineering\", \"CTO\", \"Product\", \"Developer\", \"Data\".\n- Payments: Titles containing \"Payments\", \"Operations\", \"Finance\", \"Treasury\".\n- Other: Any other title.\n\n4. Persona Score: Score the person's persona using this metric:\n- Fraud = 5\n- Risk = 4\n- Payments = 3\n- Tech (Engineering leadership) = 3\n- Other = 1\n\nReturn ONLY JSON in this format:\n{\n  \"fraud_exposure\": \"High/Medium/Low\",\n  \"fraud_insight\": \"\",\n  \"persona_type\": \"Fraud/Risk/Tech/Payments/Other\",\n  \"persona_score\": 0\n}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1392,
+        -16
+      ],
+      "id": "c07c3df6-e338-43ed-b7fe-b24c34114575",
+      "name": "AI Agent1",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-pro-latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1312,
+        176
+      ],
+      "id": "a0c6a89e-ddfb-4914-9b24-d79cd25ec718",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "fGKNxaMVbvMVc6W4",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"fraud_exposure\": \"High/Medium/Low\",\n  \"fraud_insight\": \"\",\n  \"persona_type\": \"Fraud/Tech/Payments/Other\",\n  \"persona_score\": 0\n}",
+        "autoFix": true,
+        "customizeRetryPrompt": true,
+        "prompt": "Instructions:\n--------------\nYou are a Senior Risk Analyst at Orca Fraud. Your task is to analyze a lead and provide specific classifications for sales outreach.\n\n1. Fraud Exposure: Based on the company category, how high is the risk of fraud?\n- High: Payment Processor, Digital Wallet, Neobank, Remittance Platform, Cross-Border Payments.\n- Medium: Fintech Infrastructure.\n- Low: Not Relevant.\n\n2. Fraud Insight: A concise (max 25 words) sentence explaining why this specific person at this specific company should care about Orca Fraud.\n\n3. Persona Type: Categorize the person based on their Job Title:\n- Fraud: Titles containing \"Fraud\", \"AML\", \"Financial Crime\", \"Loss Prevention\".\n- Risk: Titles containing \"Risk\", \"Compliance\", \"Internal Audit\", \"Governance\".\n- Tech: Titles containing \"Engineering\", \"CTO\", \"Product\", \"Developer\", \"Data\".\n- Payments: Titles containing \"Payments\", \"Operations\", \"Finance\".\n- Other: Any other title.\n\n4. Persona Score: Score the person's persona using this metric:\n- Fraud = 5\n- Risk = 4\n- Payments = 3\n- Tech (Engineering leadership) = 3\n- Other = 1\n\nReturn ONLY JSON in this format:\n{\n  \"fraud_exposure\": \"High/Medium/Low\",\n  \"fraud_insight\": \"\",\n  \"persona_type\": \"Fraud/Risk/Tech/Payments/Other\",\n  \"persona_score\": 0\n}\n--------------\nCompletion:\n--------------\n{completion}\n--------------\n\nAbove, the Completion did not satisfy the constraints given in the Instructions.\nError:\n--------------\n{error}\n--------------\n\nPlease try again. Please ONLY respond with a raw JSON object that satisfies the constraints laid out in the Instructions. Do not include conversational text or markdown:"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1456,
+        176
+      ],
+      "id": "2f7bc18a-78ae-4eb4-9dc8-c4b927e9ae3b",
+      "name": "Structured Output Parser1"
+    },
+    {
+      "parameters": {
+        "content": "## Fraud Exposure Estimation & Persona Classification",
+        "height": 448,
+        "width": 576,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1216,
+        -96
+      ],
+      "typeVersion": 1,
+      "id": "c93cc350-17ab-453a-9ccf-bea71de4675e",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1296,
+        480
+      ],
+      "id": "d02163ff-b8b0-47e4-a53b-176f5f75aacb",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "COAhHNmGu7gTRemB",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Discarded Leads",
+        "height": 224,
+        "width": 576,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1216,
+        416
+      ],
+      "typeVersion": 1,
+      "id": "92e91748-04ef-4d29-b372-d6ec2157c3e3",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1296,
+        768
+      ],
+      "id": "69c18cb5-d12a-438e-892c-b5ca233ed1e9",
+      "name": "Send a message",
+      "webhookId": "ea7ff69a-b836-4012-9041-8aaed2dcedc5",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "MyRPNLAn8F7HnhoI",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Error Notification",
+        "height": 240,
+        "width": 256,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1216,
+        704
+      ],
+      "typeVersion": 1,
+      "id": "ef1e4b0c-1c0c-4712-9a1c-f630b5ec077e",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "jsCode": "// DATA\nconst inputData = $('Edit Fields').item.json;\nconst companyClass = $('AI Agent').item.json.output;\nconst personaClass = $('AI Agent1').item.json.output;\n\n// --- 12. SIGNAL SCORING ---\nlet signal_score = 0;\nconst signal_map = { 'Like': 1, 'Comment': 3, 'Repost': 4 };\nsignal_score = signal_map[inputData.engagement] || 0;\n\n// --- 13. COMPANY SCORING ---\nlet company_score = 0;\nif (companyClass.category !== 'Not Relevant') {\n    company_score += 5; // Fintech identified\n    company_score += 3; // Category detected\n}\nif (personaClass.fraud_exposure === 'High') {\n    company_score += 4;\n}\n\n// --- 14. TOTAL LEAD SCORE ---\nconst persona_score = parseInt(personaClass.persona_score) || 0;\nconst total_score = signal_score + company_score + persona_score;\n\n// --- 15. LEAD TIER CLASSIFICATION ---\nlet tier = \"Tier 3\";\nif (total_score >= 12) tier = \"Tier 1\";\nelse if (total_score >= 8) tier = \"Tier 2\";\nelse if (total_score >= 5) tier = \"Tier 3\";\n\n// --- PAYLOAD ---\nreturn {\n  // Edit Fields\n  name: inputData.name,\n  linkedin_profile: inputData.profile_url,\n  title: inputData.title,\n  company: inputData.company,\n  industry: inputData.industry,\n  engagement: inputData.engagement || 'None',\n  \n  // AI Agents\n  company_category: companyClass.category,\n  fraud_exposure: personaClass.fraud_exposure,\n  persona_type: personaClass.persona_type,\n  fraud_insight: personaClass.fraud_insight,\n  \n  // Scoring Results\n  signal_score: signal_score,\n  persona_score: persona_score,\n  company_score: company_score,\n  total_score: total_score,\n  tier: tier\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2064,
+        64
+      ],
+      "id": "57e3841e-2b66-4bda-80c3-e5d738e2df0d",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "content": "## Signal Scoring, Company Scoring, & Lead Tier Classification",
+        "height": 448,
+        "width": 480,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1872,
+        -96
+      ],
+      "typeVersion": 1,
+      "id": "91fe9b0c-4da9-47be-a659-a2ccf393b8bb",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1i80S_BV6FxE6LSFJ_oia_SlzsFvVcEjtS9-6xam00Uk",
+          "mode": "list",
+          "cachedResultName": "orca_qualified_accounts",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1i80S_BV6FxE6LSFJ_oia_SlzsFvVcEjtS9-6xam00Uk/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1i80S_BV6FxE6LSFJ_oia_SlzsFvVcEjtS9-6xam00Uk/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "name": "={{ $json.name }}",
+            "linkedin_profile": "={{ $json.linkedin_profile }}",
+            "title": "={{ $json.title }}",
+            "company": "={{ $json.company }}",
+            "industry": "={{ $json.industry }}",
+            "engagement": "={{ $json.engagement }}",
+            "company_category": "={{ $json.company_category }}",
+            "fraud_exposure": "={{ $json.fraud_exposure }}",
+            "persona_type": "={{ $json.persona_type }}",
+            "signal_score": "={{ $json.signal_score }}",
+            "persona_score": "={{ $json.persona_score }}",
+            "company_score": "={{ $json.company_score }}",
+            "total_score": "={{ $json.total_score }}",
+            "tier": "={{ $json.tier }}",
+            "fraud_insight": "={{ $json.fraud_insight }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "linkedin_profile",
+              "displayName": "linkedin_profile",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "company",
+              "displayName": "company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "industry",
+              "displayName": "industry",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "engagement",
+              "displayName": "engagement",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "company_category",
+              "displayName": "company_category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fraud_exposure",
+              "displayName": "fraud_exposure",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "persona_type",
+              "displayName": "persona_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "signal_score",
+              "displayName": "signal_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "persona_score",
+              "displayName": "persona_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "company_score",
+              "displayName": "company_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "total_score",
+              "displayName": "total_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tier",
+              "displayName": "tier",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fraud_insight",
+              "displayName": "fraud_insight",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2576,
+        64
+      ],
+      "id": "ca022e5f-c47c-4298-9e40-acd875695dd4",
+      "name": "Append row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "d9LmyapYNlxpFYzz",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Error Notification",
+        "height": 240,
+        "width": 256,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1888,
+        704
+      ],
+      "typeVersion": 1,
+      "id": "c21e349e-7e5d-4ef1-b03d-83045a8ef9dc",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1968,
+        768
+      ],
+      "id": "c205e14c-76e7-4e7a-9ae5-8f4cd995cd94",
+      "name": "Send a message1",
+      "webhookId": "82d6dea3-4baf-4d87-90a5-5a946d54f109",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "MyRPNLAn8F7HnhoI",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Google Sheets Trigger": [
+      {
+        "json": {
+          "fullName": "Sarah Khan",
+          "linkedinProfileUrl": "linkedin.com/in/sarahkhan",
+          "linkedinJobTitle": "Head of Fraud",
+          "companyName": "PayFast",
+          "companyIndustry": "",
+          "linkedinHeadline": "",
+          "linkedinDescription": "",
+          "engagementType": "",
+          "location": ""
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "fullName": "John Recruiter",
+          "linkedinProfileUrl": "linkedin.com/in/johnrecruit",
+          "linkedinJobTitle": "Senior Talent Acquisition",
+          "companyName": "TechRecruit",
+          "companyIndustry": "",
+          "linkedinHeadline": "",
+          "linkedinDescription": "",
+          "engagementType": "",
+          "location": ""
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "fullName": "Avi Naidoo",
+          "linkedinProfileUrl": "linkedin.com/in/avinaidoo",
+          "linkedinJobTitle": "CTO",
+          "companyName": "",
+          "companyIndustry": "",
+          "linkedinHeadline": "",
+          "linkedinDescription": "",
+          "engagementType": "",
+          "location": ""
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Edit Fields": [
+      {
+        "json": {
+          "name": "Sarah Khan",
+          "title": "Head of Fraud",
+          "company": "PayFast",
+          "industry": "",
+          "headline": "",
+          "engagement": "",
+          "profile_url": "linkedin.com/in/sarahkhan"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "name": "John Recruiter",
+          "title": "Senior Talent Acquisition",
+          "company": "TechRecruit",
+          "industry": "",
+          "headline": "",
+          "engagement": "",
+          "profile_url": "linkedin.com/in/johnrecruit"
+        },
+        "pairedItem": {
+          "item": 1
+        }
+      },
+      {
+        "json": {
+          "name": "Avi Naidoo",
+          "title": "CTO",
+          "company": "",
+          "industry": "",
+          "headline": "",
+          "engagement": "",
+          "profile_url": "linkedin.com/in/avinaidoo"
+        },
+        "pairedItem": {
+          "item": 2
+        }
+      }
+    ],
+    "Filter": [
+      {
+        "json": {
+          "name": "Sarah Khan",
+          "title": "Head of Fraud",
+          "company": "PayFast",
+          "industry": "",
+          "headline": "",
+          "engagement": "",
+          "profile_url": "linkedin.com/in/sarahkhan"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "name": "Avi Naidoo",
+          "title": "CTO",
+          "company": "",
+          "industry": "",
+          "headline": "",
+          "engagement": "",
+          "profile_url": "linkedin.com/in/avinaidoo"
+        },
+        "pairedItem": {
+          "item": 2
+        }
+      }
+    ],
+    "AI Agent": [
+      {
+        "json": {
+          "output": {
+            "category": "Payment Processor",
+            "relevant_to_orca": "Yes",
+            "reason": "PayFast is a payment processor operating as a payment gateway in South Africa. As a payment processor, they are exposed to significant fraud risks such as card-not-present fraud and account takeovers. The job title 'Head of Fraud' explicitly confirms that fraud is a key area of concern for the company, making them an ideal customer for fraud detection solutions."
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      },
+      {
+        "json": {
+          "output": {
+            "category": "Not Relevant",
+            "relevant_to_orca": "No",
+            "reason": "The company name, industry, and headline are all empty. There is not enough information to determine the company's business or relevance."
+          }
+        },
+        "pairedItem": {
+          "item": 1
+        }
+      }
+    ],
+    "AI Agent1": [
+      {
+        "json": {
+          "output": {
+            "fraud_exposure": "High",
+            "fraud_insight": "As Head of Fraud at PayFast, Orca Fraud helps you stop transaction fraud in real-time and minimize chargebacks across your payment processing network.",
+            "persona_type": "Fraud",
+            "persona_score": 5
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Code in JavaScript": [
+      {
+        "json": {
+          "name": "Sarah Khan",
+          "linkedin_profile": "linkedin.com/in/sarahkhan",
+          "title": "Head of Fraud",
+          "company": "PayFast",
+          "industry": "",
+          "engagement": "None",
+          "company_category": "Payment Processor",
+          "fraud_exposure": "High",
+          "persona_type": "Fraud",
+          "fraud_insight": "As Head of Fraud at PayFast, Orca Fraud helps you stop transaction fraud in real-time and minimize chargebacks across your payment processing network.",
+          "signal_score": 0,
+          "persona_score": 5,
+          "company_score": 12,
+          "total_score": 17,
+          "tier": "Tier 1"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Structured Output Parser1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "33c0ee04-3771-4f5d-8ff9-bcc6ac2003d7",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "37039631554dbcf43a527924477257edee824e5d0f18748ffb274a4478fe7be0"
+  },
+  "id": "t3s451u6cDthYwIT",
+  "tags": []
+}
