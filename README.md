@@ -17,7 +17,7 @@ This repository contains a set of automation workflows designed to streamline go
 
 ## Projects
 
-### 🔹 LinkedIn Intent Engine
+### LinkedIn Intent Engine
 Automated pipeline that processes LinkedIn engagement data, filters relevant leads, classifies companies, and scores prospects for outreach.
 
 **Key Features:**
@@ -27,7 +27,7 @@ Automated pipeline that processes LinkedIn engagement data, filters relevant lea
 - Fraud exposure and persona scoring  
 - Lead tiering system for prioritization  
 
- `./orca-linkedin-intent-engine` 
+ `./linkedin-intent-engine` 
 
 ---
 
@@ -44,9 +44,7 @@ To use:
 
 ---
 
-## 👤 Author
+## Author
 
 **Paballo Mogane**  
 Junior Python Developer | Automation Engineer  
-
----
