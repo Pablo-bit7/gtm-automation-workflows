@@ -1,0 +1,1083 @@
+{
+  "name": "ZA-Pharma-Intel Ingress & Signal Engine (MVP)",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "eda54181-22fe-48ad-8607-005bdfc62525",
+              "leftValue": "={{ !$json.email.match(/@(gmail|outlook|hotmail)\\.com$/i) }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -208,
+        96
+      ],
+      "id": "9b26723e-db71-4c5d-afac-afa5da3cb840",
+      "name": "If (priority lead email)"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "358b7c4a-faed-4fc2-88b2-2241804dbf13",
+              "name": "priority",
+              "value": "High Priority",
+              "type": "string"
+            },
+            {
+              "id": "7af9dcbc-c3eb-4481-b582-cf51d73b1b12",
+              "name": "status",
+              "value": "Pending Review",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "bc29292a-0d94-4fd5-b5ba-959e6303733d",
+      "name": "Add priority status (High priority)"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f61b24dc-3def-428e-9db6-0a33f7190b7e",
+              "name": "priority",
+              "value": "Standard",
+              "type": "string"
+            },
+            {
+              "id": "b61e3315-b68a-467e-bdfe-063de55696ae",
+              "name": "status",
+              "value": "Pending Review",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        192
+      ],
+      "id": "38769d66-4182-4e86-8f89-59c8252c9f4c",
+      "name": "Add priority status (Standard)"
+    },
+    {
+      "parameters": {
+        "formTitle": "Apply for Server Access",
+        "formDescription": "<p>Request pilot access to the ZA Pharma Intel MCP<br>Professional emails are prioritised</p>\n",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Full Name",
+              "fieldName": "fullName",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email Address",
+              "fieldName": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Company",
+              "fieldName": "company",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "LinkedIn Profile URL",
+              "fieldName": "linkedin",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Role",
+              "fieldType": "dropdown",
+              "fieldName": "role",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Market Access"
+                  },
+                  {
+                    "option": "Regulatory"
+                  },
+                  {
+                    "option": "Supply Chain"
+                  },
+                  {
+                    "option": "Other"
+                  }
+                ]
+              },
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "respondWithOptions": {
+            "values": {
+              "formSubmittedText": "Due to limited alpha-phase capacity, we manually review applications to ensure high-fidelity feedback from our initial cohort.\nWe will contact you via email if your profile is selected for a pilot Access Key."
+            }
+          },
+          "useWorkflowTimezone": true,
+          "customCss": ":root {\n\t--font-family: 'Inter', sans-serif; /* Updated to match landing page font */\n\t--font-weight-normal: 400;\n\t--font-weight-bold: 600;\n\t--font-size-body: 12px;\n\t--font-size-label: 14px;\n\t--font-size-test-notice: 12px;\n\t--font-size-input: 14px;\n\t--font-size-header: 20px;\n\t--font-size-paragraph: 14px;\n\t--font-size-link: 12px;\n\t--font-size-error: 12px;\n\t--font-size-html-h1: 28px;\n\t--font-size-html-h2: 20px;\n\t--font-size-html-h3: 16px;\n\t--font-size-html-h4: 14px;\n\t--font-size-html-h5: 12px;\n\t--font-size-html-h6: 10px;\n\t--font-size-subheader: 14px;\n\n\t/* Colors */\n\t--color-background: #fbfcfe;\n\t--color-test-notice-text: #e6a23d;\n\t--color-test-notice-bg: #fefaf6;\n\t--color-test-notice-border: #f6dcb7;\n\t--color-card-bg: #ffffff;\n\t--color-card-border: #dbdfe7;\n\t--color-card-shadow: rgba(15, 118, 110, 0.06); /* Adjusted shadow to brand-700 tint */\n\t--color-link: #7e8186;\n\t--color-header: #292524; /* Updated to neutral-800 from landing page */\n\t--color-label: #555555;\n\t--color-input-border: #dbdfe7;\n\t--color-input-text: #71747A;\n\t--color-focus-border: #14b8a6; /* Matches brand-500 for focus states */\n\t\n    /* --- CHANGES MADE HERE --- */\n\t--color-submit-btn-bg: #0f766e; /* MATCHED TO BRAND-700 (Request Access Key button) */\n\t--color-submit-btn-text: #ffffff;\n\t--color-required: #ef4444;      /* MATCHED TO BRAND-700 for visual consistency */\n\t--color-html-link: #0d9488;     /* MATCHED TO BRAND-600 for interactive links */\n    /* ------------------------- */\n\n\t--color-error: #ea1f30;\n\t--color-clear-button-bg: #7e8186;\n\t--color-html-text: #555;\n\t--color-header-subtext: #7e8186;\n\n\t/* Border Radii */\n\t--border-radius-card: 8px;\n\t--border-radius-input: 6px;\n\t--border-radius-clear-btn: 50%;\n\t--card-border-radius: 8px;\n\n\t/* Spacing */\n\t--padding-container-top: 24px;\n\t--padding-card: 24px;\n\t--padding-test-notice-vertical: 12px;\n\t--padding-test-notice-horizontal: 24px;\n\t--margin-bottom-card: 16px;\n\t--padding-form-input: 12px;\n\t--card-padding: 24px;\n\t--card-margin-bottom: 16px;\n\n\t/* Dimensions */\n\t--container-width: 448px;\n\t--submit-btn-height: 48px;\n\t--checkbox-size: 18px;\n\n\t/* Others */\n\t--box-shadow-card: 0px 4px 16px 0px var(--color-card-shadow);\n\t--opacity-placeholder: 0.5;\n}\n"
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -416,
+        96
+      ],
+      "id": "56e1cc75-2947-44e9-a7ce-8f7c79441f27",
+      "name": "Access Request form",
+      "webhookId": "814abe24-b9c3-470f-b0d0-99a43194cd28"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        208,
+        96
+      ],
+      "id": "61cd78eb-8fc3-434d-9291-31d5b307132e",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1ZaPNnYoueJiYaBbacJ4OId4LBR4ZBM-cIDQ0bioRdoU/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Sheet1",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "fullName",
+              "displayName": "fullName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "company",
+              "displayName": "company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "linkedin",
+              "displayName": "linkedin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "priority",
+              "displayName": "priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "submittedAt",
+              "displayName": "submittedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "reviewNotes",
+              "displayName": "reviewNotes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "reviewdBy",
+              "displayName": "reviewdBy",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "reviewedAt",
+              "displayName": "reviewedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "useAppend": true
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        624,
+        96
+      ],
+      "id": "84b54b76-4e6d-4f98-9cb9-e0dfb1399b46",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "iSI8ltBW3iBntWuo",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return $input.all()\n  .filter(item => item.json.formMode !== \"test\")\n  .map(item => {\n\n    delete item.json.formMode;\n\n    const date = new Date(item.json.submittedAt);\n\n    item.json.submittedAt = date.toLocaleString(\"en-ZA\", {\n      timeZone: \"Africa/Johannesburg\",\n      year: \"numeric\",\n      month: \"2-digit\",\n      day: \"2-digit\",\n      hour: \"2-digit\",\n      minute: \"2-digit\",\n      hour12: false\n    }) + \" SAST\";\n\n    return item;\n  });\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        416,
+        96
+      ],
+      "id": "1b565d4e-c7fa-4ebb-8ef1-1be15115ef55",
+      "name": "Prepare Review Queue Record"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C0B214VERFF",
+          "mode": "list",
+          "cachedResultName": "applicant-review"
+        },
+        "messageType": "block",
+        "blocksUi": "={\n  \"blocks\": [\n    {\n      \"type\": \"header\",\n      \"text\": {\n        \"type\": \"plain_text\",\n        \"text\": \"New ZA Pharma Intel Applicant\"\n      }\n    },\n    {\n      \"type\": \"section\",\n      \"fields\": [\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Name:* {{$json.fullName}}\"\n        },\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Company:* {{$json.company}}\"\n        },\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Role:* {{$json.role}}\"\n        },\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Priority:* {{$json.priority}}\"\n        },\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Email:* {{$json.email}}\"\n        },\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Status:* {{$json.status}}\"\n        }\n      ]\n    },\n    {\n      \"type\": \"section\",\n      \"text\": {\n        \"type\": \"mrkdwn\",\n        \"text\": \"*LinkedIn:*\\n{{$json.linkedin}}\"\n      }\n    },\n    {\n      \"type\": \"context\",\n      \"elements\": [\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"Submitted {{$json.submittedAt}}\"\n        }\n      ]\n    },\n    {\n      \"type\": \"divider\"\n    },\n    {\n      \"type\": \"actions\",\n      \"elements\": [\n        {\n          \"type\": \"button\",\n          \"text\": {\n            \"type\": \"plain_text\",\n            \"text\": \"Approve\"\n          },\n          \"style\": \"primary\",\n          \"value\": \"approve|{{$json.email}}\"\n        },\n        {\n          \"type\": \"button\",\n          \"text\": {\n            \"type\": \"plain_text\",\n            \"text\": \"Reject\"\n          },\n          \"style\": \"danger\",\n          \"value\": \"reject|{{$json.email}}\"\n        }\n      ]\n    }\n  ]\n}",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.4,
+      "position": [
+        832,
+        96
+      ],
+      "id": "02fbdedc-bac3-43ea-865f-edc63414b2b2",
+      "name": "Send a message",
+      "webhookId": "21c73729-c479-482e-9bad-21724346b9b6",
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "J7LABoSegNrTfc4q",
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Applicant ingress & review",
+        "height": 928,
+        "width": 1568
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -528,
+        -64
+      ],
+      "typeVersion": 1,
+      "id": "5fafc091-25d2-4186-be4a-96fd3a1bee02",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "jsCode": "const payload = JSON.parse($json.body.payload);\n\nreturn [\n  {\n    json: payload\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -208,
+        544
+      ],
+      "id": "86323f90-04f1-497e-a614-507ac11c2885",
+      "name": "Parse payload"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "3faa95c0-cf9e-4027-8258-31cf892f06ee",
+              "leftValue": "={{ $json.decision }}",
+              "rightValue": "approve",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        208,
+        544
+      ],
+      "id": "ad053fa3-c780-4f96-b510-b86241064798",
+      "name": "If (Approve or Reject)"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "slack-applicant-action",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -416,
+        544
+      ],
+      "id": "00af9042-8f7e-4906-9bf3-99320c5bcb5a",
+      "name": "Applicant review Slack action",
+      "webhookId": "17e08ef3-441e-43cc-bd5f-ec8e3b77cf8a"
+    },
+    {
+      "parameters": {
+        "jsCode": "const value = $json.actions[0].value;\n\nconst [decision, email] = value.split('|');\n\nreturn [\n  {\n    json: {\n      decision,\n      email\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        0,
+        544
+      ],
+      "id": "72df5be2-e771-4cee-a3ed-bb5f0a9e0b53",
+      "name": "Applicant decision"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1ZaPNnYoueJiYaBbacJ4OId4LBR4ZBM-cIDQ0bioRdoU",
+          "mode": "list",
+          "cachedResultName": "ZA_Pharma_Intel_Applicant_Review_Queue_2026",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZaPNnYoueJiYaBbacJ4OId4LBR4ZBM-cIDQ0bioRdoU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZaPNnYoueJiYaBbacJ4OId4LBR4ZBM-cIDQ0bioRdoU/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "email",
+              "lookupValue": "={{ $json.email }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        416,
+        448
+      ],
+      "id": "acae78ad-8636-496e-a13e-601828869fd6",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "iSI8ltBW3iBntWuo",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1ZaPNnYoueJiYaBbacJ4OId4LBR4ZBM-cIDQ0bioRdoU",
+          "mode": "list",
+          "cachedResultName": "ZA_Pharma_Intel_Applicant_Review_Queue_2026",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZaPNnYoueJiYaBbacJ4OId4LBR4ZBM-cIDQ0bioRdoU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZaPNnYoueJiYaBbacJ4OId4LBR4ZBM-cIDQ0bioRdoU/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "email",
+              "lookupValue": "={{ $json.email }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        416,
+        640
+      ],
+      "id": "18a2a7b2-1654-4f09-a084-a9a2e02ecf00",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "iSI8ltBW3iBntWuo",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1ZaPNnYoueJiYaBbacJ4OId4LBR4ZBM-cIDQ0bioRdoU",
+          "mode": "list",
+          "cachedResultName": "ZA_Pharma_Intel_Applicant_Review_Queue_2026",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZaPNnYoueJiYaBbacJ4OId4LBR4ZBM-cIDQ0bioRdoU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZaPNnYoueJiYaBbacJ4OId4LBR4ZBM-cIDQ0bioRdoU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $json.row_number }}",
+            "status": "Approved",
+            "reviewedAt": "={{ $now.setZone('Africa/Johannesburg').toFormat('yyyy/MM/dd HH:mm') + ' SAST' }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "fullName",
+              "displayName": "fullName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "company",
+              "displayName": "company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "linkedin",
+              "displayName": "linkedin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "priority",
+              "displayName": "priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "submittedAt",
+              "displayName": "submittedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "reviewedAt",
+              "displayName": "reviewedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        624,
+        448
+      ],
+      "id": "3c4d7cae-dcf2-4f77-aa4e-407197c01f88",
+      "name": "Update review status",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "iSI8ltBW3iBntWuo",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1ZaPNnYoueJiYaBbacJ4OId4LBR4ZBM-cIDQ0bioRdoU",
+          "mode": "list",
+          "cachedResultName": "ZA_Pharma_Intel_Applicant_Review_Queue_2026",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZaPNnYoueJiYaBbacJ4OId4LBR4ZBM-cIDQ0bioRdoU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZaPNnYoueJiYaBbacJ4OId4LBR4ZBM-cIDQ0bioRdoU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $json.row_number }}",
+            "status": "Rejected",
+            "reviewedAt": "={{ $now.setZone('Africa/Johannesburg').toFormat('yyyy/MM/dd HH:mm') + ' SAST' }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "fullName",
+              "displayName": "fullName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "company",
+              "displayName": "company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "linkedin",
+              "displayName": "linkedin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "role",
+              "displayName": "role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "priority",
+              "displayName": "priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "submittedAt",
+              "displayName": "submittedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "reviewedAt",
+              "displayName": "reviewedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        624,
+        640
+      ],
+      "id": "71bed751-bfcb-49b5-a314-7b6ef42f7b07",
+      "name": "Update review status1",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "iSI8ltBW3iBntWuo",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "ZA Pharma Intel — Pilot Application Approved",
+        "message": "=Hi {{$json.fullName}},\n\nThank you for your interest in ZA Pharma Intel.\n\nYour application to participate in the closed alpha pilot has been reviewed and approved.\n\nWe are currently preparing onboarding and access provisioning for approved participants. You will receive a follow-up email shortly containing your access credentials, setup instructions, and pilot onboarding information.\n\nWe appreciate your interest in helping shape the future of pharmaceutical market intelligence infrastructure in South Africa.\n\n— ZA Pharma Intel",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        832,
+        448
+      ],
+      "id": "cc6af5c2-b1be-4e97-a79c-fad15255c58c",
+      "name": "Send a message1",
+      "webhookId": "64685891-356b-449c-8ad1-6856ffec3533",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "S0GwRaHYAR1XUKIJ",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "ZA Pharma Intel — Pilot Application Update",
+        "message": "=Hi {{$json.fullName}},\n\nThank you for your interest in ZA Pharma Intel and for taking the time to apply for our closed alpha pilot.\n\nAfter reviewing your application, we are unfortunately unable to include you in the current pilot cohort.\n\nDue to limited onboarding capacity during this phase, we are prioritising a narrow group of participants aligned with our immediate research and validation objectives.\n\nWe sincerely appreciate your interest and may reach out again as the platform expands into future pilot phases.\n\n— ZA Pharma Intel\n",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        832,
+        640
+      ],
+      "id": "4b7b8b38-3a96-4bbb-a2e9-e318b1f9601b",
+      "name": "Send a message2",
+      "webhookId": "64685891-356b-449c-8ad1-6856ffec3533",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "S0GwRaHYAR1XUKIJ",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "If (priority lead email)": {
+      "main": [
+        [
+          {
+            "node": "Add priority status (High priority)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Add priority status (Standard)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Access Request form": {
+      "main": [
+        [
+          {
+            "node": "If (priority lead email)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add priority status (High priority)": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add priority status (Standard)": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Prepare Review Queue Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Review Queue Record": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse payload": {
+      "main": [
+        [
+          {
+            "node": "Applicant decision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Applicant review Slack action": {
+      "main": [
+        [
+          {
+            "node": "Parse payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Applicant decision": {
+      "main": [
+        [
+          {
+            "node": "If (Approve or Reject)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If (Approve or Reject)": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Update review status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Update review status1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update review status": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update review status1": {
+      "main": [
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "78fd4917-3acd-4c7c-b3c5-5a1c1dbd80b9",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "de59e49cb4979e12824b038bc7614e46e5f36b7e30a89469cad33ad63951ea94"
+  },
+  "id": "6OaAaFJc8QVJYrqS",
+  "tags": []
+}
