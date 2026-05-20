@@ -108,12 +108,13 @@
               "requiredField": true
             },
             {
-              "fieldLabel": "Email Address",
+              "fieldLabel": "Email",
+              "fieldType": "email",
               "fieldName": "email",
               "requiredField": true
             },
             {
-              "fieldLabel": "Company",
+              "fieldLabel": "Organization",
               "fieldName": "company",
               "requiredField": true
             },
@@ -377,13 +378,13 @@
     {
       "parameters": {
         "content": "## Applicant ingress & review",
-        "height": 928,
-        "width": 1568
+        "height": 1168,
+        "width": 1520
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -528,
-        -64
+        -480,
+        -48
       ],
       "typeVersion": 1,
       "id": "5fafc091-25d2-4186-be4a-96fd3a1bee02",
@@ -397,7 +398,7 @@
       "typeVersion": 2,
       "position": [
         -208,
-        544
+        656
       ],
       "id": "86323f90-04f1-497e-a614-507ac11c2885",
       "name": "Parse payload"
@@ -431,7 +432,7 @@
       "typeVersion": 2.3,
       "position": [
         208,
-        544
+        656
       ],
       "id": "ad053fa3-c780-4f96-b510-b86241064798",
       "name": "If (Approve or Reject)"
@@ -446,7 +447,7 @@
       "typeVersion": 2.1,
       "position": [
         -416,
-        544
+        656
       ],
       "id": "00af9042-8f7e-4906-9bf3-99320c5bcb5a",
       "name": "Applicant review Slack action",
@@ -460,7 +461,7 @@
       "typeVersion": 2,
       "position": [
         0,
-        544
+        656
       ],
       "id": "72df5be2-e771-4cee-a3ed-bb5f0a9e0b53",
       "name": "Applicant decision"
@@ -536,7 +537,7 @@
       "typeVersion": 4.7,
       "position": [
         416,
-        640
+        848
       ],
       "id": "18a2a7b2-1654-4f09-a084-a9a2e02ecf00",
       "name": "Get row(s) in sheet1",
@@ -678,8 +679,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        624,
-        448
+        640,
+        352
       ],
       "id": "3c4d7cae-dcf2-4f77-aa4e-407197c01f88",
       "name": "Update review status",
@@ -822,8 +823,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        624,
-        640
+        640,
+        768
       ],
       "id": "71bed751-bfcb-49b5-a314-7b6ef42f7b07",
       "name": "Update review status1",
@@ -839,7 +840,7 @@
       "parameters": {
         "sendTo": "={{ $json.email }}",
         "subject": "ZA Pharma Intel — Pilot Application Approved",
-        "message": "=Hi {{$json.fullName}},\n\nThank you for your interest in ZA Pharma Intel.\n\nYour application to participate in the closed alpha pilot has been reviewed and approved.\n\nWe are currently preparing onboarding and access provisioning for approved participants. You will receive a follow-up email shortly containing your access credentials, setup instructions, and pilot onboarding information.\n\nWe appreciate your interest in helping shape the future of pharmaceutical market intelligence infrastructure in South Africa.\n\n— ZA Pharma Intel",
+        "message": "=<p>Hi {{$json.fullName}},</p>\n\n<p>Thank you for your interest in ZA Pharma Intel.</p>\n\n<p>\nYour application to participate in the closed alpha pilot has been reviewed and approved.\n</p>\n\n<p>\nWe are currently preparing onboarding and access provisioning for approved participants. You will receive a follow-up email shortly containing setup instructions and pilot onboarding information.\n</p>\n\n<p>\nWe appreciate your interest in helping shape the future of pharmaceutical market intelligence infrastructure in South Africa.\n</p>\n\n<p>\n<strong>ZA Pharma Intel</strong>\n</p>",
         "options": {
           "appendAttribution": false
         }
@@ -847,8 +848,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        832,
-        448
+        640,
+        528
       ],
       "id": "cc6af5c2-b1be-4e97-a79c-fad15255c58c",
       "name": "Send a message1",
@@ -864,7 +865,7 @@
       "parameters": {
         "sendTo": "={{ $json.email }}",
         "subject": "ZA Pharma Intel — Pilot Application Update",
-        "message": "=Hi {{$json.fullName}},\n\nThank you for your interest in ZA Pharma Intel and for taking the time to apply for our closed alpha pilot.\n\nAfter reviewing your application, we are unfortunately unable to include you in the current pilot cohort.\n\nDue to limited onboarding capacity during this phase, we are prioritising a narrow group of participants aligned with our immediate research and validation objectives.\n\nWe sincerely appreciate your interest and may reach out again as the platform expands into future pilot phases.\n\n— ZA Pharma Intel\n",
+        "message": "=<p>Hi {{$json.fullName}},</p>\n\n<p>\nThank you for your interest in ZA Pharma Intel and for taking the time to apply for our closed alpha pilot.\n</p>\n\n<p>\nAfter reviewing your application, we are unfortunately unable to include you in the current pilot cohort.\n</p>\n\n<p>\nDue to limited onboarding capacity during this phase, we are prioritising a narrow group of participants aligned with our immediate research and validation objectives.\n</p>\n\n<p>\nWe sincerely appreciate your interest and may reach out again as the platform expands into future pilot phases.\n</p>\n\n<p>\n<strong>ZA Pharma Intel</strong>\n</p>",
         "options": {
           "appendAttribution": false
         }
@@ -872,12 +873,418 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        832,
-        640
+        640,
+        944
       ],
       "id": "4b7b8b38-3a96-4bbb-a2e9-e318b1f9601b",
       "name": "Send a message2",
       "webhookId": "64685891-356b-449c-8ad1-6856ffec3533",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "S0GwRaHYAR1XUKIJ",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "formTitle": "Pilot Feedback & Signal Report",
+        "formDescription": "<p>Submit feedback, operational issues, feature requests, or data discrepancies encountered during the ZA Pharma Intel MCP pilot.<p/>",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Full Name",
+              "fieldName": "fullName",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email",
+              "fieldName": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Organization",
+              "fieldName": "company",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Signal Category",
+              "fieldType": "dropdown",
+              "fieldName": "category",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Bug"
+                  },
+                  {
+                    "option": "Feature Request"
+                  },
+                  {
+                    "option": "Data Discrepancy"
+                  },
+                  {
+                    "option": "Workflow Friction"
+                  },
+                  {
+                    "option": "Other"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Operational Impact",
+              "fieldType": "dropdown",
+              "fieldName": "impact",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Low"
+                  },
+                  {
+                    "option": "Medium"
+                  },
+                  {
+                    "option": "High"
+                  },
+                  {
+                    "option": "Critical"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Description",
+              "fieldType": "textarea",
+              "fieldName": "description",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "respondWithOptions": {
+            "values": {
+              "formSubmittedText": "All submissions are reviewed internally before engineering escalation."
+            }
+          },
+          "useWorkflowTimezone": true,
+          "customCss": ":root {\n\t--font-family: 'Inter', sans-serif; /* Updated to match landing page font */\n\t--font-weight-normal: 400;\n\t--font-weight-bold: 600;\n\t--font-size-body: 12px;\n\t--font-size-label: 14px;\n\t--font-size-test-notice: 12px;\n\t--font-size-input: 14px;\n\t--font-size-header: 20px;\n\t--font-size-paragraph: 14px;\n\t--font-size-link: 12px;\n\t--font-size-error: 12px;\n\t--font-size-html-h1: 28px;\n\t--font-size-html-h2: 20px;\n\t--font-size-html-h3: 16px;\n\t--font-size-html-h4: 14px;\n\t--font-size-html-h5: 12px;\n\t--font-size-html-h6: 10px;\n\t--font-size-subheader: 14px;\n\n\t/* Colors */\n\t--color-background: #fbfcfe;\n\t--color-test-notice-text: #e6a23d;\n\t--color-test-notice-bg: #fefaf6;\n\t--color-test-notice-border: #f6dcb7;\n\t--color-card-bg: #ffffff;\n\t--color-card-border: #dbdfe7;\n\t--color-card-shadow: rgba(15, 118, 110, 0.06); /* Adjusted shadow to brand-700 tint */\n\t--color-link: #7e8186;\n\t--color-header: #292524; /* Updated to neutral-800 from landing page */\n\t--color-label: #555555;\n\t--color-input-border: #dbdfe7;\n\t--color-input-text: #71747A;\n\t--color-focus-border: #14b8a6; /* Matches brand-500 for focus states */\n\t\n    /* --- CHANGES MADE HERE --- */\n\t--color-submit-btn-bg: #0f766e; /* MATCHED TO BRAND-700 (Request Access Key button) */\n\t--color-submit-btn-text: #ffffff;\n\t--color-required: #ef4444;      /* MATCHED TO BRAND-700 for visual consistency */\n\t--color-html-link: #0d9488;     /* MATCHED TO BRAND-600 for interactive links */\n    /* ------------------------- */\n\n\t--color-error: #ea1f30;\n\t--color-clear-button-bg: #7e8186;\n\t--color-html-text: #555;\n\t--color-header-subtext: #7e8186;\n\n\t/* Border Radii */\n\t--border-radius-card: 8px;\n\t--border-radius-input: 6px;\n\t--border-radius-clear-btn: 50%;\n\t--card-border-radius: 8px;\n\n\t/* Spacing */\n\t--padding-container-top: 24px;\n\t--padding-card: 24px;\n\t--padding-test-notice-vertical: 12px;\n\t--padding-test-notice-horizontal: 24px;\n\t--margin-bottom-card: 16px;\n\t--padding-form-input: 12px;\n\t--card-padding: 24px;\n\t--card-margin-bottom: 16px;\n\n\t/* Dimensions */\n\t--container-width: 448px;\n\t--submit-btn-height: 48px;\n\t--checkbox-size: 18px;\n\n\t/* Others */\n\t--box-shadow-card: 0px 4px 16px 0px var(--color-card-shadow);\n\t--opacity-placeholder: 0.5;\n}"
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -416,
+        1536
+      ],
+      "id": "747a94ed-5737-4714-833f-62785dbf8683",
+      "name": "Feedback Form",
+      "webhookId": "c6005bd8-6b43-4700-af5a-8041cc34f5b9"
+    },
+    {
+      "parameters": {
+        "jsCode": "function generateSignalId(submittedAt) {\n\n  const date = new Date(submittedAt);\n\n  const year = date.getFullYear();\n\n  const month = String(date.getMonth() + 1).padStart(2, '0');\n\n  const day = String(date.getDate()).padStart(2, '0');\n\n  const hours = String(date.getHours()).padStart(2, '0');\n\n  const minutes = String(date.getMinutes()).padStart(2, '0');\n\n  const seconds = String(date.getSeconds()).padStart(2, '0');\n\n  return `SIG-${year}${month}${day}-${hours}${minutes}${seconds}`;\n}\n\nreturn $input.all()\n  .filter(item => item.json.formMode !== 'test')\n  .map(item => {\n\n    delete item.json.formMode;\n\n    item.json.signalId = generateSignalId(item.json.submittedAt);\n\n    item.json.status = 'Pending Review';\n\n    return item;\n  });"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -208,
+        1536
+      ],
+      "id": "dd6c321e-dd4c-4165-a0f6-b587440b3e09",
+      "name": "Prepare signal record"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Signal Submission\n\nCategory: {{$json.category}}\n\nOperational Impact: {{$json.impact}}\n\nDescription:\n{{$json.description}}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an internal triage assistant for ZA Pharma Intel, a pharmaceutical market intelligence platform operating in South Africa.\n\nYour task is to analyse incoming pilot telemetry and feedback submissions.\n\nYour responsibilities:\n- classify operational importance\n- detect user sentiment\n- summarize the signal clearly\n- recommend an operational action\n\nRules:\n- Do NOT invent facts not explicitly stated.\n- Do NOT speculate about root causes.\n- Do NOT generate fictional technical explanations.\n- Be conservative with severity.\n- Keep summaries concise and operationally useful.\n- Assume all reports may be incomplete.\n\nPriority Scale:\n1 = informational/cosmetic\n2 = low operational impact\n3 = moderate usability or workflow issue\n4 = serious data/workflow problem\n5 = critical trust, access, or blocking issue\n\nRecommended Actions:\n- Investigate\n- Monitor\n- Escalate\n- Ignore\n\nReturn ONLY valid JSON in this exact structure:\n\n{\n  \"priority_score\": 1-5,\n  \"sentiment\": \"Positive | Neutral | Negative\",\n  \"summary\": \"max 20 words\",\n  \"recommended_action\": \"Investigate | Monitor | Escalate | Ignore\"\n}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        0,
+        1536
+      ],
+      "id": "2dd718ef-3fb0-4210-b50e-b25fa346e3be",
+      "name": "AI Agent",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        1744
+      ],
+      "id": "8bf6ce55-efa7-4a25-8290-3da4768e0989",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "Q2DpGYKBFzQNEzqI",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"priority_score\": {\n      \"type\": \"integer\",\n      \"minimum\": 1,\n      \"maximum\": 5\n    },\n    \"sentiment\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"Positive\",\n        \"Neutral\",\n        \"Negative\"\n      ]\n    },\n    \"summary\": {\n      \"type\": \"string\",\n      \"maxLength\": 120\n    },\n    \"recommended_action\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"Investigate\",\n        \"Monitor\",\n        \"Escalate\",\n        \"Ignore\"\n      ]\n    }\n  },\n  \"required\": [\n    \"priority_score\",\n    \"sentiment\",\n    \"summary\",\n    \"recommended_action\"\n  ]\n}",
+        "autoFix": true,
+        "customizeRetryPrompt": true,
+        "prompt": "Instructions:\n--------------\n{instructions}\n--------------\n\nCompletion:\n--------------\n{completion}\n--------------\n\nThe previous completion failed validation against the required schema.\n\nValidation Error:\n--------------\n{error}\n--------------\n\nYou must correct the response while strictly following all constraints from the Instructions.\n\nRules:\n- Return ONLY valid JSON\n- Do NOT include markdown\n- Do NOT include explanations or commentary\n- Do NOT invent information not present in the input\n- Use ONLY allowed enum values\n- Ensure all required fields are present\n- Ensure priority_score is an integer between 1 and 5\n- Ensure summary is concise and under 120 characters\n\nReturn ONLY the corrected JSON object."
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        176,
+        1744
+      ],
+      "id": "1cd14ad8-d104-4ed3-b218-9f5c8abf41ff",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "jsCode": "const original = $('Prepare signal record').first().json;\n\nconst ai = $json.output;\n\nconst submittedDate = new Date(original.submittedAt);\n\nconst formattedSubmittedAt = submittedDate.toLocaleString('en-ZA', {\n  timeZone: 'Africa/Johannesburg',\n  year: 'numeric',\n  month: '2-digit',\n  day: '2-digit',\n  hour: '2-digit',\n  minute: '2-digit',\n  hour12: false,\n}) + ' SAST';\n\nreturn [\n  {\n    json: {\n      ...original,\n\n      submittedAt: formattedSubmittedAt,\n\n      priority_score: ai.priority_score,\n\n      sentiment: ai.sentiment,\n\n      summary: ai.summary,\n\n      recommended_action: ai.recommended_action\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        352,
+        1536
+      ],
+      "id": "7394bddc-2849-4fee-ada0-f0a221ce839f",
+      "name": "Normalize AI output"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1UhidUnyZN3HUI2fabjOXbTlvT_UDJrNZzG0tCPfPSko",
+          "mode": "list",
+          "cachedResultName": "ZA_Pharma_Intel_Signal_Queue_2026",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1UhidUnyZN3HUI2fabjOXbTlvT_UDJrNZzG0tCPfPSko/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1UhidUnyZN3HUI2fabjOXbTlvT_UDJrNZzG0tCPfPSko/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "signalId",
+              "displayName": "signalId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fullName",
+              "displayName": "fullName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "company",
+              "displayName": "company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "category",
+              "displayName": "category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "impact",
+              "displayName": "impact",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "description",
+              "displayName": "description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "priority_score",
+              "displayName": "priority_score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "sentiment",
+              "displayName": "sentiment",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "summary",
+              "displayName": "summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "recommended_action",
+              "displayName": "recommended_action",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "submittedAt",
+              "displayName": "submittedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "reviewedAt",
+              "displayName": "reviewedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        560,
+        1536
+      ],
+      "id": "aec781e2-1f65-4a43-886a-99daf12d7e7d",
+      "name": "Log Signal Queue Record",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "iSI8ltBW3iBntWuo",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C0B284C59D2",
+          "mode": "list",
+          "cachedResultName": "signal-review"
+        },
+        "messageType": "block",
+        "blocksUi": "={\n  \"blocks\": [\n    {\n      \"type\": \"header\",\n      \"text\": {\n        \"type\": \"plain_text\",\n        \"text\": \"New Pilot Signal\"\n      }\n    },\n    {\n      \"type\": \"section\",\n      \"fields\": [\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Signal ID:* {{$json.signalId}}\"\n        },\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Category:* {{$json.category}}\"\n        },\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Impact:* {{$json.impact}}\"\n        },\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Priority:* {{$json.priority_score}}\"\n        },\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Sentiment:* {{$json.sentiment}}\"\n        },\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"*Action:* {{$json.recommended_action}}\"\n        }\n      ]\n    },\n    {\n      \"type\": \"section\",\n      \"text\": {\n        \"type\": \"mrkdwn\",\n        \"text\": \"*Summary:*\\n{{$json.summary}}\"\n      }\n    },\n    {\n      \"type\": \"section\",\n      \"text\": {\n        \"type\": \"mrkdwn\",\n        \"text\": \"*Description:*\\n{{$json.description}}\"\n      }\n    },\n    {\n      \"type\": \"context\",\n      \"elements\": [\n        {\n          \"type\": \"mrkdwn\",\n          \"text\": \"Submitted {{$json.submittedAt}}\"\n        }\n      ]\n    },\n    {\n      \"type\": \"divider\"\n    },\n    {\n      \"type\": \"actions\",\n      \"elements\": [\n        {\n          \"type\": \"button\",\n          \"text\": {\n            \"type\": \"plain_text\",\n            \"text\": \"Approve GitHub Issue\"\n          },\n          \"style\": \"primary\",\n          \"value\": \"approve|{{$json.signalId}}\"\n        },\n        {\n          \"type\": \"button\",\n          \"text\": {\n            \"type\": \"plain_text\",\n            \"text\": \"Reject Signal\"\n          },\n          \"style\": \"danger\",\n          \"value\": \"reject|{{$json.signalId}}\"\n        }\n      ]\n    }\n  ]\n}",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.4,
+      "position": [
+        768,
+        1664
+      ],
+      "id": "1e61e2cf-fcca-4fe6-b73e-913543aa6cc8",
+      "name": "Send a message3",
+      "webhookId": "21c73729-c479-482e-9bad-21724346b9b6",
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "J7LABoSegNrTfc4q",
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "ZA Pharma Intel — Signal Received",
+        "message": "=<p>Hi {{$json.fullName}},</p>\n\n<p>\nThank you for submitting feedback to the ZA Pharma Intel pilot program.\n</p>\n\n<p>\nYour signal has been received and queued for internal review by our product and engineering team.\n</p>\n\n<p>\n<strong>Signal ID:</strong> {{$json.signalId}}\n</p>\n\n<p>\nDuring the closed alpha phase, all submissions are manually reviewed before escalation into the technical roadmap to ensure prioritisation accuracy and signal quality.\n</p>\n\n<p>\nWe appreciate your contribution to improving the platform.\n</p>\n\n<p>\n<strong>ZA Pharma Intel</strong>\n</p>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        768,
+        1408
+      ],
+      "id": "75f40152-2b18-4c0e-9d5d-1c21078595fe",
+      "name": "Send a message4",
+      "webhookId": "3b5a2dd9-2840-45ba-b83a-fc0a2107f54e",
+      "alwaysOutputData": false,
       "credentials": {
         "gmailOAuth2": {
           "id": "S0GwRaHYAR1XUKIJ",
@@ -1030,6 +1437,11 @@
             "node": "Update review status",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -1041,30 +1453,120 @@
             "node": "Update review status1",
             "type": "main",
             "index": 0
-          }
-        ]
-      ]
-    },
-    "Update review status": {
-      "main": [
-        [
-          {
-            "node": "Send a message1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Update review status1": {
-      "main": [
-        [
+          },
           {
             "node": "Send a message2",
             "type": "main",
             "index": 0
           }
         ]
+      ]
+    },
+    "Update review status": {
+      "main": [
+        []
+      ]
+    },
+    "Update review status1": {
+      "main": [
+        []
+      ]
+    },
+    "Feedback Form": {
+      "main": [
+        [
+          {
+            "node": "Prepare signal record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare signal record": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Normalize AI output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize AI output": {
+      "main": [
+        [
+          {
+            "node": "Log Signal Queue Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Signal Queue Record": {
+      "main": [
+        [
+          {
+            "node": "Send a message4",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a message3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message3": {
+      "main": [
+        []
+      ]
+    },
+    "Send a message4": {
+      "main": [
+        []
       ]
     }
   },
@@ -1073,7 +1575,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "78fd4917-3acd-4c7c-b3c5-5a1c1dbd80b9",
+  "versionId": "ee4d4f7d-237c-423e-bb6d-e10597709a6b",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "de59e49cb4979e12824b038bc7614e46e5f36b7e30a89469cad33ad63951ea94"
