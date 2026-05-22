@@ -30,8 +30,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -208,
-        96
+        416,
+        48
       ],
       "id": "9b26723e-db71-4c5d-afac-afa5da3cb840",
       "name": "If (priority lead email)"
@@ -60,8 +60,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        0,
-        0
+        624,
+        -48
       ],
       "id": "bc29292a-0d94-4fd5-b5ba-959e6303733d",
       "name": "Add priority status (High priority)"
@@ -90,8 +90,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        0,
-        192
+        624,
+        144
       ],
       "id": "38769d66-4182-4e86-8f89-59c8252c9f4c",
       "name": "Add priority status (Standard)"
@@ -161,8 +161,8 @@
       "type": "n8n-nodes-base.formTrigger",
       "typeVersion": 2.5,
       "position": [
-        -416,
-        96
+        -400,
+        160
       ],
       "id": "56e1cc75-2947-44e9-a7ce-8f7c79441f27",
       "name": "Access Request form",
@@ -173,8 +173,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        208,
-        96
+        832,
+        48
       ],
       "id": "61cd78eb-8fc3-434d-9291-31d5b307132e",
       "name": "Merge"
@@ -318,8 +318,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        624,
-        96
+        1248,
+        48
       ],
       "id": "84b54b76-4e6d-4f98-9cb9-e0dfb1399b46",
       "name": "Append row in sheet",
@@ -337,8 +337,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        416,
-        96
+        1040,
+        48
       ],
       "id": "1b565d4e-c7fa-4ebb-8ef1-1be15115ef55",
       "name": "Prepare Review Queue Record"
@@ -362,8 +362,8 @@
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.4,
       "position": [
-        832,
-        96
+        1456,
+        48
       ],
       "id": "02fbdedc-bac3-43ea-865f-edc63414b2b2",
       "name": "Send a message",
@@ -377,14 +377,14 @@
     },
     {
       "parameters": {
-        "content": "## Applicant ingress & review",
-        "height": 1168,
-        "width": 1520
+        "content": "## Applicant ingress & Review",
+        "height": 1296,
+        "width": 2144
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         -480,
-        -48
+        -96
       ],
       "typeVersion": 1,
       "id": "5fafc091-25d2-4186-be4a-96fd3a1bee02",
@@ -398,7 +398,7 @@
       "typeVersion": 2,
       "position": [
         -208,
-        656
+        720
       ],
       "id": "86323f90-04f1-497e-a614-507ac11c2885",
       "name": "Parse payload"
@@ -432,7 +432,7 @@
       "typeVersion": 2.3,
       "position": [
         208,
-        656
+        720
       ],
       "id": "ad053fa3-c780-4f96-b510-b86241064798",
       "name": "If (Approve or Reject)"
@@ -447,7 +447,7 @@
       "typeVersion": 2.1,
       "position": [
         -416,
-        656
+        720
       ],
       "id": "00af9042-8f7e-4906-9bf3-99320c5bcb5a",
       "name": "Applicant review Slack action",
@@ -461,7 +461,7 @@
       "typeVersion": 2,
       "position": [
         0,
-        656
+        720
       ],
       "id": "72df5be2-e771-4cee-a3ed-bb5f0a9e0b53",
       "name": "Applicant decision"
@@ -496,7 +496,7 @@
       "typeVersion": 4.7,
       "position": [
         416,
-        448
+        512
       ],
       "id": "acae78ad-8636-496e-a13e-601828869fd6",
       "name": "Get row(s) in sheet",
@@ -537,7 +537,7 @@
       "typeVersion": 4.7,
       "position": [
         416,
-        848
+        912
       ],
       "id": "18a2a7b2-1654-4f09-a084-a9a2e02ecf00",
       "name": "Get row(s) in sheet1",
@@ -680,7 +680,7 @@
       "typeVersion": 4.7,
       "position": [
         640,
-        352
+        416
       ],
       "id": "3c4d7cae-dcf2-4f77-aa4e-407197c01f88",
       "name": "Update review status",
@@ -824,7 +824,7 @@
       "typeVersion": 4.7,
       "position": [
         640,
-        768
+        832
       ],
       "id": "71bed751-bfcb-49b5-a314-7b6ef42f7b07",
       "name": "Update review status1",
@@ -849,7 +849,7 @@
       "typeVersion": 2.2,
       "position": [
         640,
-        528
+        592
       ],
       "id": "cc6af5c2-b1be-4e97-a79c-fad15255c58c",
       "name": "Send a message1",
@@ -874,7 +874,7 @@
       "typeVersion": 2.2,
       "position": [
         640,
-        944
+        1008
       ],
       "id": "4b7b8b38-3a96-4bbb-a2e9-e318b1f9601b",
       "name": "Send a message2",
@@ -978,7 +978,7 @@
       "typeVersion": 2.5,
       "position": [
         -416,
-        1536
+        1600
       ],
       "id": "747a94ed-5737-4714-833f-62785dbf8683",
       "name": "Feedback Form",
@@ -991,8 +991,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -208,
-        1536
+        416,
+        1440
       ],
       "id": "dd6c321e-dd4c-4165-a0f6-b587440b3e09",
       "name": "Prepare signal record"
@@ -1009,8 +1009,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        0,
-        1536
+        624,
+        1440
       ],
       "id": "2dd718ef-3fb0-4210-b50e-b25fa346e3be",
       "name": "AI Agent",
@@ -1023,8 +1023,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        -48,
-        1744
+        576,
+        1648
       ],
       "id": "8bf6ce55-efa7-4a25-8290-3da4768e0989",
       "name": "Google Gemini Chat Model1",
@@ -1046,8 +1046,8 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        176,
-        1744
+        800,
+        1648
       ],
       "id": "1cd14ad8-d104-4ed3-b218-9f5c8abf41ff",
       "name": "Structured Output Parser"
@@ -1059,8 +1059,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        352,
-        1536
+        976,
+        1440
       ],
       "id": "7394bddc-2849-4fee-ada0-f0a221ce839f",
       "name": "Normalize AI output"
@@ -1222,8 +1222,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        560,
-        1536
+        1184,
+        1440
       ],
       "id": "aec781e2-1f65-4a43-886a-99daf12d7e7d",
       "name": "Log Signal Queue Record",
@@ -1253,8 +1253,8 @@
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.4,
       "position": [
-        768,
-        1664
+        1392,
+        1568
       ],
       "id": "1e61e2cf-fcca-4fe6-b73e-913543aa6cc8",
       "name": "Send a message3",
@@ -1278,8 +1278,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        768,
-        1408
+        1392,
+        1312
       ],
       "id": "75f40152-2b18-4c0e-9d5d-1c21078595fe",
       "name": "Send a message4",
@@ -1291,9 +1291,312 @@
           "name": "Gmail account"
         }
       }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1ZaPNnYoueJiYaBbacJ4OId4LBR4ZBM-cIDQ0bioRdoU",
+          "mode": "list",
+          "cachedResultName": "ZA_Pharma_Intel_Applicant_Review_Queue_2026",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZaPNnYoueJiYaBbacJ4OId4LBR4ZBM-cIDQ0bioRdoU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZaPNnYoueJiYaBbacJ4OId4LBR4ZBM-cIDQ0bioRdoU/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "email",
+              "lookupValue": "={{$json.email}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -208,
+        1600
+      ],
+      "id": "e7aa07b9-f03e-4a6f-8e31-72b72c452699",
+      "name": "Lookup Pilot Applicant",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "iSI8ltBW3iBntWuo",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "4a57277c-df96-455c-a265-4aeec7429c59",
+              "leftValue": "={{$json.status}}",
+              "rightValue": "Approved",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        0,
+        1600
+      ],
+      "id": "66b05222-5d7d-474d-bf95-ce1eaade3db0",
+      "name": "If (Approved)"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1ZaPNnYoueJiYaBbacJ4OId4LBR4ZBM-cIDQ0bioRdoU",
+          "mode": "list",
+          "cachedResultName": "ZA_Pharma_Intel_Applicant_Review_Queue_2026",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZaPNnYoueJiYaBbacJ4OId4LBR4ZBM-cIDQ0bioRdoU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZaPNnYoueJiYaBbacJ4OId4LBR4ZBM-cIDQ0bioRdoU/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "email",
+              "lookupValue": "={{$json.email}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -192,
+        160
+      ],
+      "id": "7d245e3b-90db-439f-8117-5bc368183958",
+      "name": "Lookup Existing Applicant",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "iSI8ltBW3iBntWuo",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "f16ecc89-48ea-484b-bd37-901f012093ab",
+              "leftValue": "={{$json.email}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        16,
+        160
+      ],
+      "id": "eae73f1c-a767-42d7-98e8-2a03b19e832e",
+      "name": "If (Existing Applicant)"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "63703d67-dd8e-459a-80ff-ee5fc534e9ca",
+              "name": "fullName",
+              "value": "={{ $('Access Request form').item.json.fullName }}",
+              "type": "string"
+            },
+            {
+              "id": "15742ca3-80e8-4a22-86bc-d3818608b855",
+              "name": "email",
+              "value": "={{ $('Access Request form').item.json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "8f3ed39a-0b00-443d-a1ca-e8486e29a17a",
+              "name": "company",
+              "value": "={{ $('Access Request form').item.json.company }}",
+              "type": "string"
+            },
+            {
+              "id": "66ce9f9c-403d-4668-8a85-9808530d2b6d",
+              "name": "linkedin",
+              "value": "={{ $('Access Request form').item.json.linkedin }}",
+              "type": "string"
+            },
+            {
+              "id": "daf5a174-f05c-46db-b341-c76cd72c9a1a",
+              "name": "role",
+              "value": "={{ $('Access Request form').item.json.role }}",
+              "type": "string"
+            },
+            {
+              "id": "d2d70763-4ed5-4bed-96b5-8efb3347d9be",
+              "name": "submittedAt",
+              "value": "={{ $('Access Request form').item.json.submittedAt }}",
+              "type": "string"
+            },
+            {
+              "id": "7d2b54d9-bad8-4ca4-b15e-6becfd9a0089",
+              "name": "formMode",
+              "value": "={{ $('Access Request form').item.json.formMode }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        48
+      ],
+      "id": "022c0d2d-1a6d-4b1f-b89f-889c89b7a948",
+      "name": "Restore Form Data"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "02bcd258-70ef-4626-885f-38e72b0f632a",
+              "name": "fullName",
+              "value": "={{ $('Feedback Form').item.json.fullName }}",
+              "type": "string"
+            },
+            {
+              "id": "cb72c160-24eb-423b-9cb6-d0afadb0b0bc",
+              "name": "email",
+              "value": "={{ $('Feedback Form').item.json.email }}",
+              "type": "string"
+            },
+            {
+              "id": "725018bb-88c2-4fb2-a964-573952864d68",
+              "name": "company",
+              "value": "={{ $('Feedback Form').item.json.company }}",
+              "type": "string"
+            },
+            {
+              "id": "e6ad3a5d-0651-459f-8640-a56016035739",
+              "name": "impact",
+              "value": "={{ $('Feedback Form').item.json.impact }}",
+              "type": "string"
+            },
+            {
+              "id": "5cd5122f-beff-44b5-a90c-ffa6db61dbed",
+              "name": "description",
+              "value": "={{ $('Feedback Form').item.json.description }}",
+              "type": "string"
+            },
+            {
+              "id": "1154f58c-59d6-4bcb-938f-cbd716718fb8",
+              "name": "submittedAt",
+              "value": "={{ $('Feedback Form').item.json.submittedAt }}",
+              "type": "string"
+            },
+            {
+              "id": "021081f8-518e-4e21-9dbf-740d278f12ea",
+              "name": "formMode",
+              "value": "={{ $('Feedback Form').item.json.formMode }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        1440
+      ],
+      "id": "14d6ad55-e870-4759-9255-5e1dc35b4db7",
+      "name": "Restore Form Data1"
+    },
+    {
+      "parameters": {
+        "content": "## Signal Intake & Review",
+        "height": 1360,
+        "width": 2144,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -480,
+        1248
+      ],
+      "typeVersion": 1,
+      "id": "9bb003c8-0362-4e95-a2d5-a231b9411d2d",
+      "name": "Sticky Note1"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Feedback Form": [
+      {
+        "json": {
+          "fullName": "Paballo Mogane",
+          "email": "moganepaballo@gmail.com",
+          "company": "gvfc",
+          "category": "Workflow Friction",
+          "impact": "Low",
+          "description": "test",
+          "submittedAt": "2026-05-21T12:01:27.587+02:00",
+          "formMode": "test"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "connections": {
     "If (priority lead email)": {
       "main": [
@@ -1317,7 +1620,7 @@
       "main": [
         [
           {
-            "node": "If (priority lead email)",
+            "node": "Lookup Existing Applicant",
             "type": "main",
             "index": 0
           }
@@ -1476,7 +1779,7 @@
       "main": [
         [
           {
-            "node": "Prepare signal record",
+            "node": "Lookup Pilot Applicant",
             "type": "main",
             "index": 0
           }
@@ -1568,6 +1871,73 @@
       "main": [
         []
       ]
+    },
+    "Lookup Pilot Applicant": {
+      "main": [
+        [
+          {
+            "node": "If (Approved)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If (Approved)": {
+      "main": [
+        [
+          {
+            "node": "Restore Form Data1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lookup Existing Applicant": {
+      "main": [
+        [
+          {
+            "node": "If (Existing Applicant)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If (Existing Applicant)": {
+      "main": [
+        [
+          {
+            "node": "Restore Form Data",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Restore Form Data": {
+      "main": [
+        [
+          {
+            "node": "If (priority lead email)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Restore Form Data1": {
+      "main": [
+        [
+          {
+            "node": "Prepare signal record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
@@ -1575,7 +1945,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "ee4d4f7d-237c-423e-bb6d-e10597709a6b",
+  "versionId": "26c240f0-d8e9-4176-ab25-020387589e98",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "de59e49cb4979e12824b038bc7614e46e5f36b7e30a89469cad33ad63951ea94"
