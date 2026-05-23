@@ -840,7 +840,7 @@
       "parameters": {
         "sendTo": "={{ $json.email }}",
         "subject": "ZA Pharma Intel — Pilot Application Approved",
-        "message": "=<p>Hi {{$json.fullName}},</p>\n\n<p>Thank you for your interest in ZA Pharma Intel.</p>\n\n<p>\nYour application to participate in the closed alpha pilot has been reviewed and approved.\n</p>\n\n<p>\nWe are currently preparing onboarding and access provisioning for approved participants. You will receive a follow-up email shortly containing setup instructions and pilot onboarding information.\n</p>\n\n<p>\nWe appreciate your interest in helping shape the future of pharmaceutical market intelligence infrastructure in South Africa.\n</p>\n\n<p>\n<strong>ZA Pharma Intel</strong>\n</p>",
+        "message": "=<p>Hi {{$json.fullName}},</p>\n\n<p>Thank you for applying to participate in the <strong>ZA Pharma Intel Closed Alpha</strong>.</p>\n\n<p>After reviewing your application, we're pleased to let you know that you have been accepted into our initial pilot cohort.</p>\n\n<p>We're building ZA Pharma Intel to bridge South Africa's pharmaceutical data silos and map the true pathway of market access across the healthcare ecosystem. As an early participant, your feedback will directly influence how the platform evolves and what capabilities we prioritise next.</p>\n\n<hr>\n\n<p><strong>Step 1: Review the Pilot Setup Guide</strong></p>\n\n<p>\nPlease review the onboarding documentation before connecting to the engine:\n<br>\n<a href=\"https://docs.google.com/presentation/d/1uDYYHkscWdGSbyyFezNN5FnrPAZC_vlt/edit?usp=sharing&ouid=112622488599595594608&rtpof=true&sd=true\">\nZA Pharma Intel Pilot Setup Guide\n</a>\n</p>\n\n<p><strong>Step 2: Connect the Intelligence Engine</strong></p>\n\n<p>\nUse the following MCP endpoint when configuring your Claude connector:\n</p>\n\n<ul>\n  <li>\n    <strong>Endpoint:</strong>\n    https://za-pharma-intelligence.fastmcp.app/mcp\n  </li>\n</ul>\n\n<hr>\n\n<p><strong>A Request From Our Team</strong></p>\n\n<p>\nThis is an actively developed alpha environment. You may encounter incomplete datasets, unexpected behaviour, or opportunities for improvement.\n</p>\n\n<p>\nWhen you do, please tell us. High-quality feedback from domain experts is the single most valuable input we can receive at this stage.\n</p>\n\n<p>\nWhether you identify data gaps, workflow friction, usability issues, or new opportunities for intelligence generation, your submissions will be reviewed directly by our product and engineering team.\n</p>\n\n<hr>\n\n<p>\nThank you for helping us build the intelligence infrastructure layer for South African healthcare.\nWe look forward to learning from your experience.\n</p>\n\n<p>\nWarm regards,\n<br>\n<strong>ZA Pharma Intel</strong>\n</p>",
         "options": {
           "appendAttribution": false
         }
@@ -865,7 +865,7 @@
       "parameters": {
         "sendTo": "={{ $json.email }}",
         "subject": "ZA Pharma Intel — Pilot Application Update",
-        "message": "=<p>Hi {{$json.fullName}},</p>\n\n<p>\nThank you for your interest in ZA Pharma Intel and for taking the time to apply for our closed alpha pilot.\n</p>\n\n<p>\nAfter reviewing your application, we are unfortunately unable to include you in the current pilot cohort.\n</p>\n\n<p>\nDue to limited onboarding capacity during this phase, we are prioritising a narrow group of participants aligned with our immediate research and validation objectives.\n</p>\n\n<p>\nWe sincerely appreciate your interest and may reach out again as the platform expands into future pilot phases.\n</p>\n\n<p>\n<strong>ZA Pharma Intel</strong>\n</p>",
+        "message": "=<p>Hi {{$json.fullName}},</p>\n\n<p>Thank you for taking the time to apply for the <strong>ZA Pharma Intel Closed Alpha</strong>.</p>\n\n<p>After reviewing your application, we are unfortunately unable to include you in the current pilot cohort.</p>\n\n<p>Due to limited onboarding capacity during this early-stage alpha program, we are intentionally limiting participation to a small number of users that align with our immediate research and validation objectives.</p>\n\n<p>We expect participation requirements to evolve as the platform matures.</p>\n\n<hr>\n\n<p>\nWe sincerely appreciate your interest and willingness to contribute to the development of the platform.\n</p>\n\n<p>\nShould future pilot opportunities become available, we may reach out again.\n</p>\n\n<p>\nWarm regards,\n<br>\n<strong>ZA Pharma Intel</strong>\n</p>\n",
         "options": {
           "appendAttribution": false
         }
@@ -1270,7 +1270,7 @@
       "parameters": {
         "sendTo": "={{ $json.email }}",
         "subject": "ZA Pharma Intel — Signal Received",
-        "message": "=<p>Hi {{$json.fullName}},</p>\n\n<p>\nThank you for submitting feedback to the ZA Pharma Intel pilot program.\n</p>\n\n<p>\nYour signal has been received and queued for internal review by our product and engineering team.\n</p>\n\n<p>\n<strong>Signal ID:</strong> {{$json.signalId}}\n</p>\n\n<p>\nDuring the closed alpha phase, all submissions are manually reviewed before escalation into the technical roadmap to ensure prioritisation accuracy and signal quality.\n</p>\n\n<p>\nWe appreciate your contribution to improving the platform.\n</p>\n\n<p>\n<strong>ZA Pharma Intel</strong>\n</p>",
+        "message": "=<p>Hi {{$json.fullName}},</p>\n\n<p>Thank you for submitting feedback to the <strong>ZA Pharma Intel Closed Alpha</strong>.</p>\n\n<p>Your signal has been received and added to our internal review queue.</p>\n\n<p>During the alpha phase, all submissions are reviewed by our product and engineering team before being escalated into the development roadmap.</p>\n\n<hr>\n\n<p><strong>Signal Details</strong></p>\n\n<ul>\n  <li><strong>Signal ID:</strong> {{$json.signalId}}</li>\n  <li><strong>Category:</strong> {{$json.category}}</li>\n  <li><strong>Impact:</strong> {{$json.impact}}</li>\n</ul>\n\n<hr>\n\n<p>\nHigh-quality feedback from domain experts is the most valuable input we receive at this stage of development.\n</p>\n\n<p>\nWhether you're identifying data gaps, workflow friction, platform defects, or opportunities for new intelligence capabilities, your contributions directly influence how ZA Pharma Intel evolves.\n</p>\n\n<p>\nThank you for helping us build the intelligence infrastructure layer for South African healthcare.\n</p>\n\n<p>\nWarm regards,\n<br>\n<strong>ZA Pharma Intel</strong>\n</p>",
         "options": {
           "appendAttribution": false
         }
@@ -1945,7 +1945,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "26c240f0-d8e9-4176-ab25-020387589e98",
+  "versionId": "6f4f7568-9a1b-4ac4-bb4a-8b5f34d859ce",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "de59e49cb4979e12824b038bc7614e46e5f36b7e30a89469cad33ad63951ea94"
