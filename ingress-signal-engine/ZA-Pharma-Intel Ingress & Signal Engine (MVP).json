@@ -363,7 +363,7 @@
       "typeVersion": 2.4,
       "position": [
         1456,
-        48
+        -48
       ],
       "id": "02fbdedc-bac3-43ea-865f-edc63414b2b2",
       "name": "Send a message",
@@ -397,7 +397,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -208,
+        -192,
         720
       ],
       "id": "86323f90-04f1-497e-a614-507ac11c2885",
@@ -431,7 +431,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        208,
+        224,
         720
       ],
       "id": "ad053fa3-c780-4f96-b510-b86241064798",
@@ -446,7 +446,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -416,
+        -400,
         720
       ],
       "id": "00af9042-8f7e-4906-9bf3-99320c5bcb5a",
@@ -460,7 +460,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        0,
+        16,
         720
       ],
       "id": "72df5be2-e771-4cee-a3ed-bb5f0a9e0b53",
@@ -495,7 +495,7 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        416,
+        432,
         512
       ],
       "id": "acae78ad-8636-496e-a13e-601828869fd6",
@@ -536,7 +536,7 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        416,
+        432,
         912
       ],
       "id": "18a2a7b2-1654-4f09-a084-a9a2e02ecf00",
@@ -679,7 +679,7 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        640,
+        656,
         416
       ],
       "id": "3c4d7cae-dcf2-4f77-aa4e-407197c01f88",
@@ -823,7 +823,7 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        640,
+        656,
         832
       ],
       "id": "71bed751-bfcb-49b5-a314-7b6ef42f7b07",
@@ -840,7 +840,7 @@
       "parameters": {
         "sendTo": "={{ $json.email }}",
         "subject": "ZA Pharma Intel — Pilot Application Approved",
-        "message": "=<p>Hi {{$json.fullName}},</p>\n\n<p>Thank you for applying to participate in the <strong>ZA Pharma Intel Closed Alpha</strong>.</p>\n\n<p>After reviewing your application, we're pleased to let you know that you have been accepted into our initial pilot cohort.</p>\n\n<p>We're building ZA Pharma Intel to bridge South Africa's pharmaceutical data silos and map the true pathway of market access across the healthcare ecosystem. As an early participant, your feedback will directly influence how the platform evolves and what capabilities we prioritise next.</p>\n\n<hr>\n\n<p><strong>Step 1: Review the Pilot Setup Guide</strong></p>\n\n<p>\nPlease review the onboarding documentation before connecting to the engine:\n<br>\n<a href=\"https://docs.google.com/presentation/d/1uDYYHkscWdGSbyyFezNN5FnrPAZC_vlt/edit?usp=sharing&ouid=112622488599595594608&rtpof=true&sd=true\">\nZA Pharma Intel Pilot Setup Guide\n</a>\n</p>\n\n<p><strong>Step 2: Connect the Intelligence Engine</strong></p>\n\n<p>\nUse the following MCP endpoint when configuring your Claude connector:\n</p>\n\n<ul>\n  <li>\n    <strong>Endpoint:</strong>\n    https://za-pharma-intelligence.fastmcp.app/mcp\n  </li>\n</ul>\n\n<hr>\n\n<p><strong>A Request From Our Team</strong></p>\n\n<p>\nThis is an actively developed alpha environment. You may encounter incomplete datasets, unexpected behaviour, or opportunities for improvement.\n</p>\n\n<p>\nWhen you do, please tell us. High-quality feedback from domain experts is the single most valuable input we can receive at this stage.\n</p>\n\n<p>\nWhether you identify data gaps, workflow friction, usability issues, or new opportunities for intelligence generation, your submissions will be reviewed directly by our product and engineering team.\n</p>\n\n<hr>\n\n<p>\nThank you for helping us build the intelligence infrastructure layer for South African healthcare.\nWe look forward to learning from your experience.\n</p>\n\n<p>\nWarm regards,\n<br>\n<strong>ZA Pharma Intel</strong>\n</p>",
+        "message": "=<p>Hi {{$json.fullName}},</p>\n\n<p>Thank you for applying to participate in the <strong>ZA Pharma Intel Closed Alpha</strong>.</p>\n\n<p>After reviewing your application, we're pleased to let you know that you have been accepted into our initial pilot cohort.</p>\n\n<p>We're building ZA Pharma Intel to bridge South Africa's pharmaceutical data silos and map the true pathway of market access across the healthcare ecosystem. As an early participant, your feedback will directly influence how the platform evolves and what capabilities we prioritise next.</p>\n\n<hr>\n\n<p><strong>Step 1: Review the Pilot Setup Guide</strong></p>\n\n<p>\nPlease review the onboarding documentation before connecting to the engine:\n<br>\n<a href=\"https://docs.google.com/presentation/d/1uDYYHkscWdGSbyyFezNN5FnrPAZC_vlt/edit?usp=sharing&ouid=112622488599595594608&rtpof=true&sd=true\">\nZA Pharma Intel Pilot Setup Guide\n</a>\n</p>\n\n<p><strong>Step 2: Connect the Intelligence Engine</strong></p>\n\n<p>\nUse the following MCP endpoint when configuring your Claude connector:\n</p>\n\n<ul>\n  <li>\n    <strong>Endpoint:</strong>\n    https://za-pharma-intelligence.fastmcp.app/mcp\n  </li>\n</ul>\n\n<hr>\n\n<p><strong>A Request From Our Team</strong></p>\n\n<p>\nThis is an actively developed alpha environment. You may encounter incomplete datasets, unexpected behaviour, or opportunities for improvement.\n</p>\n\n<p>\nWhen you do, please tell us. High-quality feedback from domain experts is the single most valuable input we can receive at this stage.\n</p>\n\n<p>\nWhether you identify data gaps, workflow friction, usability issues, or new opportunities for intelligence generation, your submissions will be reviewed directly by our product and engineering team.\n</p>\n\n<p>\nSubmit feedback at any time:\n<br>\n<a href=\"https://za-pharma-intel.mywire.org/form/c6005bd8-6b43-4700-af5a-8041cc34f5b9\">\nZA Pharma Intel Feedback Portal\n</a>\n</p>\n\n<hr>\n\n<p>\nThank you for helping us build the intelligence infrastructure layer for South African healthcare.\nWe look forward to learning from your experience.\n</p>\n\n<p>\nWarm regards,\n<br>\n<strong>ZA Pharma Intel</strong>\n</p>",
         "options": {
           "appendAttribution": false
         }
@@ -848,7 +848,7 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        640,
+        656,
         592
       ],
       "id": "cc6af5c2-b1be-4e97-a79c-fad15255c58c",
@@ -873,7 +873,7 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        640,
+        656,
         1008
       ],
       "id": "4b7b8b38-3a96-4bbb-a2e9-e318b1f9601b",
@@ -1254,7 +1254,7 @@
       "typeVersion": 2.4,
       "position": [
         1392,
-        1568
+        1536
       ],
       "id": "1e61e2cf-fcca-4fe6-b73e-913543aa6cc8",
       "name": "Send a message3",
@@ -1279,7 +1279,7 @@
       "typeVersion": 2.2,
       "position": [
         1392,
-        1312
+        1344
       ],
       "id": "75f40152-2b18-4c0e-9d5d-1c21078595fe",
       "name": "Send a message4",
@@ -1408,40 +1408,6 @@
           "name": "Google Sheets account"
         }
       }
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "f16ecc89-48ea-484b-bd37-901f012093ab",
-              "leftValue": "={{$json.email}}",
-              "rightValue": "",
-              "operator": {
-                "type": "string",
-                "operation": "empty",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        16,
-        160
-      ],
-      "id": "eae73f1c-a767-42d7-98e8-2a03b19e832e",
-      "name": "If (Existing Applicant)"
     },
     {
       "parameters": {
@@ -1576,6 +1542,119 @@
       "typeVersion": 1,
       "id": "9bb003c8-0362-4e95-a2d5-a231b9411d2d",
       "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "ZA Pharma Intel — Application Received",
+        "message": "=<p>Hi {{$json.fullName}},</p>\n\n<p>Thank you for your interest in participating in the <strong>ZA Pharma Intel Closed Alpha</strong>.</p>\n\n<p>Your application has been received and added to our review queue.</p>\n\n<p>We're building ZA Pharma Intel to bridge South Africa's pharmaceutical data silos and map the true pathway of market access across the healthcare ecosystem.</p>\n\n<p>During this closed alpha phase, all applications are reviewed manually to ensure that we maintain a focused cohort capable of providing high-quality feedback across the healthcare value chain.</p>\n\n<hr>\n\n<p><strong>What Happens Next?</strong></p>\n\n<p>\nOur team will review your application based on current pilot objectives, participant mix, and available onboarding capacity.\n</p>\n\n<p>\nIf your profile aligns with our current pilot requirements, we will contact you via email with onboarding instructions and access details.\n</p>\n\n<hr>\n\n<p>\nThank you for your interest in helping us build the intelligence infrastructure layer for South African healthcare.\n</p>\n\n<p>\nWarm regards,\n<br>\n<strong>ZA Pharma Intel</strong>\n</p>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1456,
+        144
+      ],
+      "id": "0e16b9de-4b40-4950-bf21-103f7fd60755",
+      "name": "Send a message5",
+      "webhookId": "64685891-356b-449c-8ad1-6856ffec3533",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "S0GwRaHYAR1XUKIJ",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "f16ecc89-48ea-484b-bd37-901f012093ab",
+              "leftValue": "={{$json.email}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        16,
+        160
+      ],
+      "id": "eae73f1c-a767-42d7-98e8-2a03b19e832e",
+      "name": "If (New Applicant)"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "ZA Pharma Intel — Application Already Received",
+        "message": "=<p>Hi {{$json.fullName}},</p>\n\n<p>Thank you for your continued interest in participating in the <strong>ZA Pharma Intel Closed Alpha</strong>.</p>\n\n<p>Our records indicate that we have already received an application associated with this email address and that it is currently in our review queue.</p>\n\n<p>No further action is required at this stage, and submitting additional applications will not affect your review status.</p>\n\n<hr>\n\n<p><strong>What Happens Next?</strong></p>\n\n<p>\nOur team reviews applications based on current pilot objectives, participant mix, and available onboarding capacity.\n</p>\n\n<p>\nIf your profile aligns with our current pilot requirements, we will contact you via email with onboarding instructions and access details.\n</p>\n\n<hr>\n\n<p>\nWe appreciate your patience while we work through applications and build the initial cohort for the pilot.\n</p>\n\n<p>\nThank you for your interest in helping us build the intelligence infrastructure layer for South African healthcare.\n</p>\n\n<p>\nWarm regards,\n<br>\n<strong>ZA Pharma Intel</strong>\n</p>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        272
+      ],
+      "id": "2dd0576e-c39b-4aa1-8f89-f3f8f43ca6c6",
+      "name": "Send a message6",
+      "webhookId": "64685891-356b-449c-8ad1-6856ffec3533",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "S0GwRaHYAR1XUKIJ",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e4dd0a6c-8f6f-4e66-8b3f-42ee26d83358",
+              "name": "fullName",
+              "value": "={{ $('Access Request form').item.json.fullName }}",
+              "type": "string"
+            },
+            {
+              "id": "15742ca3-80e8-4a22-86bc-d3818608b855",
+              "name": "email",
+              "value": "={{ $('Access Request form').item.json.email }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        272
+      ],
+      "id": "14f76e97-40de-405f-83ff-71d9a4e6242c",
+      "name": "Restore Form Data2"
     }
   ],
   "pinData": {
@@ -1665,6 +1744,11 @@
         [
           {
             "node": "Send a message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a message5",
             "type": "main",
             "index": 0
           }
@@ -1898,23 +1982,11 @@
       "main": [
         [
           {
-            "node": "If (Existing Applicant)",
+            "node": "If (New Applicant)",
             "type": "main",
             "index": 0
           }
         ]
-      ]
-    },
-    "If (Existing Applicant)": {
-      "main": [
-        [
-          {
-            "node": "Restore Form Data",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        []
       ]
     },
     "Restore Form Data": {
@@ -1938,6 +2010,35 @@
           }
         ]
       ]
+    },
+    "If (New Applicant)": {
+      "main": [
+        [
+          {
+            "node": "Restore Form Data",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Restore Form Data2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Restore Form Data2": {
+      "main": [
+        [
+          {
+            "node": "Send a message6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
@@ -1945,7 +2046,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "6f4f7568-9a1b-4ac4-bb4a-8b5f34d859ce",
+  "versionId": "ff2e8417-6d77-436c-8f81-b56b6e14e5ac",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "de59e49cb4979e12824b038bc7614e46e5f36b7e30a89469cad33ad63951ea94"
