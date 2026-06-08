@@ -392,19 +392,6 @@
     },
     {
       "parameters": {
-        "jsCode": "const payload = JSON.parse($json.body.payload);\n\nreturn [\n  {\n    json: payload\n  }\n];\n"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -192,
-        720
-      ],
-      "id": "86323f90-04f1-497e-a614-507ac11c2885",
-      "name": "Parse payload"
-    },
-    {
-      "parameters": {
         "conditions": {
           "options": {
             "caseSensitive": true,
@@ -436,22 +423,6 @@
       ],
       "id": "ad053fa3-c780-4f96-b510-b86241064798",
       "name": "If (Approve or Reject)"
-    },
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "slack-applicant-action",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2.1,
-      "position": [
-        -400,
-        720
-      ],
-      "id": "00af9042-8f7e-4906-9bf3-99320c5bcb5a",
-      "name": "Applicant review Slack action",
-      "webhookId": "17e08ef3-441e-43cc-bd5f-ec8e3b77cf8a"
     },
     {
       "parameters": {
@@ -1655,6 +1626,126 @@
       ],
       "id": "14f76e97-40de-405f-83ff-71d9a4e6242c",
       "name": "Restore Form Data2"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.channel.name }}",
+                    "rightValue": "applicant-review",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "d1c789a7-d16c-4e62-821f-ac6215ba6e5b"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "96f60957-2cd1-48f2-b978-289dd966ba32",
+                    "leftValue": "={{ $json.channel.name }}",
+                    "rightValue": "signal-review",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -1264,
+        1408
+      ],
+      "id": "7a7e532f-0f5a-4b5f-9c50-dcd8434b99ac",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "jsCode": "const payload = $json;\nconst actionValue = payload.actions?.[0]?.value || \"\";\nconst [decision, signalId] = actionValue.split('|');\nconst blocks = payload.message?.blocks || [];\n\nlet summary = \"\";\nlet description = \"\";\nlet impact = \"\";\nlet priority = \"\";\n\nfor (const block of blocks) {\n  if (block.type === 'section') {\n    // 1. Standalone text blocks\n    if (block.text?.text?.includes('*Summary:*')) {\n      summary = block.text.text.replace(/\\*Summary:\\*\\s*\\n?/, '').trim();\n    }\n    if (block.text?.text?.includes('*Description:*')) {\n      description = block.text.text.replace(/\\*Description:\\*\\s*\\n?/, '').trim();\n    }\n    \n    // 2. Field grid array\n    if (block.fields && Array.isArray(block.fields)) {\n      for (const field of block.fields) {\n        if (field.text?.includes('*Impact:*')) {\n          impact = field.text.replace(/\\*Impact:\\*\\s*/, '').trim();\n        }\n        if (field.text?.includes('*Priority:*')) {\n          priority = field.text.replace(/\\*Priority:\\*\\s*/, '').trim();\n        }\n      }\n    }\n  }\n}\n\nreturn {\n  decision,\n  signalId,\n  summary,\n  description,\n  impact,\n  priority,\n  responseUrl: payload.response_url\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        0,
+        2144
+      ],
+      "id": "0ad15ccf-3fe5-4106-a5c8-6262ee51904a",
+      "name": "Extract Signal Data"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "slack-applicant-action",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1696,
+        1408
+      ],
+      "id": "00af9042-8f7e-4906-9bf3-99320c5bcb5a",
+      "name": "Slack action",
+      "webhookId": "17e08ef3-441e-43cc-bd5f-ec8e3b77cf8a"
+    },
+    {
+      "parameters": {
+        "jsCode": "const payload = JSON.parse($json.body.payload);\n\nreturn [\n  {\n    json: payload\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1472,
+        1408
+      ],
+      "id": "86323f90-04f1-497e-a614-507ac11c2885",
+      "name": "Parse Payload"
+    },
+    {
+      "parameters": {
+        "content": "## Applicant & Signal Review Router",
+        "height": 624,
+        "width": 960,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1872,
+        1168
+      ],
+      "typeVersion": 1,
+      "id": "32aa66f2-6db5-4267-84d9-b2225b33490f",
+      "name": "Sticky Note2"
     }
   ],
   "pinData": {
@@ -1760,28 +1851,6 @@
         [
           {
             "node": "Append row in sheet",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Parse payload": {
-      "main": [
-        [
-          {
-            "node": "Applicant decision",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Applicant review Slack action": {
-      "main": [
-        [
-          {
-            "node": "Parse payload",
             "type": "main",
             "index": 0
           }
@@ -2039,6 +2108,46 @@
           }
         ]
       ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Applicant decision",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Extract Signal Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack action": {
+      "main": [
+        [
+          {
+            "node": "Parse Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Payload": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
@@ -2046,7 +2155,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "ff2e8417-6d77-436c-8f81-b56b6e14e5ac",
+  "versionId": "30e9ae05-e219-4ace-89cd-2a8195aca311",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "de59e49cb4979e12824b038bc7614e46e5f36b7e30a89469cad33ad63951ea94"
