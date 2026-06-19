@@ -1746,6 +1746,77 @@
       "typeVersion": 1,
       "id": "32aa66f2-6db5-4267-84d9-b2225b33490f",
       "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "8081e041-bfdf-4c93-bf0c-e1f650163a6a",
+              "leftValue": "={{ $json.decision }}",
+              "rightValue": "approve",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        208,
+        2144
+      ],
+      "id": "0552ce01-3a94-4ba8-9538-2b3fa37c9414",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "owner": {
+          "__rl": true,
+          "value": "Pablo-bit7",
+          "mode": "list",
+          "cachedResultName": "Pablo-bit7",
+          "cachedResultUrl": "https://github.com/Pablo-bit7"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "sa-pharma-mcp",
+          "mode": "list",
+          "cachedResultName": "sa-pharma-mcp",
+          "cachedResultUrl": "https://github.com/Pablo-bit7/sa-pharma-mcp"
+        },
+        "title": "=[{{ $json.signalId }}] {{ $json.summary }}",
+        "body": "=### Description\n{{ $json.description }}\n\n### Context Metadata\n- **Signal ID:** {{ $json.signalId }}\n- **Impact:** {{ $json.impact }}\n- **Priority:** {{ $json.priority }}",
+        "labels": [],
+        "assignees": []
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        416,
+        2048
+      ],
+      "id": "51c9b76a-4581-4ace-bafb-49ee82b09f67",
+      "name": "Create an issue",
+      "webhookId": "74529ae0-493d-42ff-b168-018d0e0e13d4",
+      "credentials": {
+        "githubApi": {
+          "id": "psefC8pmmO33Ueqm",
+          "name": "GitHub account"
+        }
+      }
     }
   ],
   "pinData": {
@@ -2148,6 +2219,28 @@
           }
         ]
       ]
+    },
+    "Extract Signal Data": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Create an issue",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
@@ -2155,7 +2248,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "30e9ae05-e219-4ace-89cd-2a8195aca311",
+  "versionId": "9218c673-6011-4d35-98e5-3f067fe101e1",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "de59e49cb4979e12824b038bc7614e46e5f36b7e30a89469cad33ad63951ea94"
