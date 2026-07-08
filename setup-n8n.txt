@@ -1,0 +1,1 @@
+https://github.com/Pablo-bit7/linux-system-automation/blob/main/setup-n8n.sh
